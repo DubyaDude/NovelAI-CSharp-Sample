@@ -1,0 +1,3598 @@
+ {
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_healthCheck",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Everything is running fine."
+          }
+        },
+        "tags": [
+          "/"
+        ]
+      }
+    },
+    "/user/register": {
+      "post": {
+        "operationId": "UserController_createUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The user has been successfully created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessfulLoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ]
+      }
+    },
+    "/user/login": {
+      "post": {
+        "operationId": "UserController_loginUser",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Login successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessfulLoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Key is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ]
+      }
+    },
+    "/user/change-access-key": {
+      "post": {
+        "operationId": "UserController_changeAccessKey",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeAccessKeyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Access Key change successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessfulLoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/resend-email-verification": {
+      "post": {
+        "operationId": "UserController_requestEmailVerification",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailVerificationStartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Email verification letter has been sent."
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ]
+      }
+    },
+    "/user/verify-email": {
+      "post": {
+        "operationId": "UserController_verifyEmail",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailVerificationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The email has been successfully verified."
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Verification token was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ]
+      }
+    },
+    "/user/information": {
+      "get": {
+        "operationId": "UserController_getAccountInformation",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Account information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountInformationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/deletion/request": {
+      "post": {
+        "operationId": "UserController_requestAccountDeletion",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeletionStartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Your request has been processed. If the email address provided is registered, it will receive a letter with further instructions."
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Cannot delete accounts with active recurring subscriptions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/deletion/delete": {
+      "post": {
+        "operationId": "UserController_deleteAccount",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeletionFinishRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Account deletion successful."
+          },
+          "401": {
+            "description": "Deletion token was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Cannot delete accounts with active recurring subscriptions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ]
+      }
+    },
+    "/user/recovery/request": {
+      "post": {
+        "operationId": "UserController_requestAccountRecovery",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecoveryStartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Your request has been processed. If the email address provided is registered, it will receive a letter with further instructions."
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ]
+      }
+    },
+    "/user/recovery/recover": {
+      "post": {
+        "operationId": "UserController_recoverAccount",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecoveryFinishRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Account recovery successful.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessfulLoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Recovery token was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ]
+      }
+    },
+    "/user/delete": {
+      "post": {
+        "operationId": "UserController_deleteAccountUnchecked",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Account deletion successful."
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Cannot delete accounts with active recurring subscriptions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/data": {
+      "get": {
+        "operationId": "UserController_getUserData",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Various user information.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserAccountDataResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/priority": {
+      "get": {
+        "operationId": "UserController_getCurrentPriority",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Amount of max priority actions left, next max priority action refill (UNIX timestamp) and current task priority.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriorityResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/giftkeys": {
+      "get": {
+        "operationId": "UserController_getGiftKeys",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Purchased Gift Keys.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GiftKeysResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/subscription": {
+      "get": {
+        "operationId": "UserController_getSubscription",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Current subscription, date of expiry and perks.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/keystore": {
+      "get": {
+        "operationId": "UserController_getKeystore",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Keystore buffer in Base64 format.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetKeystoreResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      },
+      "put": {
+        "operationId": "UserController_updateKeystore",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateKeystoreRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Edit is successful."
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/objects/{type}": {
+      "get": {
+        "operationId": "UserController_getObjects",
+        "parameters": [{
+          "name": "type",
+          "required": true,
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "List of serverside-stored objects of that type.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      },
+      "put": {
+        "operationId": "UserController_createObject",
+        "parameters": [{
+          "name": "type",
+          "required": true,
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDataInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Object created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Specified object was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/objects/{type}/{id}": {
+      "get": {
+        "operationId": "UserController_getObject",
+        "parameters": [{
+            "name": "type",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Found object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      },
+      "patch": {
+        "operationId": "UserController_editObject",
+        "parameters": [{
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDataInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Object edited successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Specified object was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict occured while updating this object.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      },
+      "delete": {
+        "operationId": "UserController_deleteObject",
+        "parameters": [{
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Object deleted successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserData"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Specified object was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/clientsettings": {
+      "get": {
+        "operationId": "UserController_getClientSettings",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Client settings in an arbitrary format."
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      },
+      "put": {
+        "operationId": "UserController_updateClientSettings",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Edit is successful."
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/submission": {
+      "post": {
+        "operationId": "UserController_postUserSubmission",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSubmissionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Submission is successful."
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/submission/{event}": {
+      "get": {
+        "operationId": "UserController_getUserSubmission",
+        "parameters": [{
+          "name": "event",
+          "required": true,
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "User submission"
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/vote-submission/{event}": {
+      "get": {
+        "operationId": "UserController_getUserSubmissionVotes",
+        "parameters": [{
+          "name": "event",
+          "required": true,
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "User submission votes"
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      },
+      "post": {
+        "operationId": "UserController_voteSubmission",
+        "parameters": [{
+          "name": "event",
+          "required": true,
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSubmissionVoteInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Vote is successful."
+          },
+          "201": {
+            "description": ""
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      },
+      "delete": {
+        "operationId": "UserController_retractSubmissionVote",
+        "parameters": [{
+          "name": "event",
+          "required": true,
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserSubmissionVoteInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Vote is successful."
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/subscription/bind": {
+      "post": {
+        "operationId": "SubscriptionController_bindSubscription",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BindSubscriptionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Subscription has been bound properly."
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Subscription ID was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict occured while binding subscription.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/subscription/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/user/subscription/change": {
+      "post": {
+        "operationId": "SubscriptionController_changeSubscriptionPlan",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeSubscriptionPlanRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscription plan has been changed properly."
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Subscription SKU was not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict occured while changing subscription plan.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/user/subscription/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/ai/generate": {
+      "post": {
+        "operationId": "AIController_aiGenerate",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AiGenerateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The output has been successfully generated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiGenerateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "An active subscription is required to access this endpoint.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/ai/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/ai/generate-stream": {
+      "post": {
+        "operationId": "AIController_aiGenerateStreamable",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AiGenerateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The request has been accepted and the output is generating (SSE).",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiGenerateStreamableResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "An active subscription is required to access this endpoint.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/ai/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/ai/classify": {
+      "post": {
+        "operationId": "AIController_classify",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "The output has been successfully generated.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiSequenceClassificationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "An active subscription is required to access this endpoint.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/ai/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/ai/generate-image/suggest-tags": {
+      "get": {
+        "operationId": "AIController_generateImageTags",
+        "parameters": [{
+            "name": "model",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "prompt",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiRequestImageGenerationTagsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/ai/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/ai/generate-voice": {
+      "get": {
+        "operationId": "AIController_generateVoice",
+        "parameters": [{
+            "name": "text",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "seed",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "voice",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "opus",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "version",
+            "required": true,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/ai/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/ai/module/train": {
+      "post": {
+        "operationId": "AIModuleController_trainModule",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AiModuleTrainRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The training request has been successfully sent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiModuleDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "An active subscription required to access this endpoint.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/ai/module/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/ai/module/all": {
+      "get": {
+        "operationId": "AIModuleController_allModules",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AiModuleDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/ai/module/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/ai/module/{id}": {
+      "get": {
+        "operationId": "AIModuleController_getModule",
+        "parameters": [{
+          "name": "id",
+          "required": true,
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiModuleDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Module not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/ai/module/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      },
+      "delete": {
+        "operationId": "AIModuleController_deleteModule",
+        "parameters": [{
+          "name": "id",
+          "required": true,
+          "in": "path",
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Module deleted successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiModuleDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Module not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/ai/module/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/ai/module/buy-training-steps": {
+      "post": {
+        "operationId": "AIModuleController_buyTrainingSteps",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuyTrainingStepsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Steps have been purchased properly."
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict occured while buying training steps.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/ai/module/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    }
+  },
+  "info": {
+    "title": "NovelAI Backend",
+    "description": "",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "ApiError": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "number"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "statusCode",
+          "message"
+        ]
+      },
+      "CreateUserRequest": {
+        "type": "object",
+        "properties": {
+          "recaptcha": {
+            "type": "string",
+            "description": "ReCAPTCHA response token for the novelai.net domain"
+          },
+          "key": {
+            "type": "string",
+            "minLength": 64,
+            "description": "Required access key"
+          },
+          "email": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 64,
+            "description": "SHA-256 hashed email in hexadecimal"
+          },
+          "emailCleartext": {
+            "type": "string",
+            "description": "Email address (provided as cleartext for email verification, stored hashed)"
+          },
+          "giftkey": {
+            "type": "string",
+            "description": "Subscription gift key, if provided will be automatically activated upon registration"
+          }
+        },
+        "required": [
+          "recaptcha",
+          "key"
+        ]
+      },
+      "SuccessfulLoginResponse": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "description": "Access Token to be used in the Authorization header in the format of \"Bearer ${accessToken}\""
+          }
+        },
+        "required": [
+          "accessToken"
+        ]
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 64,
+            "description": "Required access key"
+          }
+        },
+        "required": [
+          "key"
+        ]
+      },
+      "ChangeAccessKeyRequest": {
+        "type": "object",
+        "properties": {
+          "currentAccessKey": {
+            "type": "string",
+            "minLength": 64,
+            "description": "Current access key"
+          },
+          "newAccessKey": {
+            "type": "string",
+            "minLength": 64,
+            "description": "New access key"
+          },
+          "newEmail": {
+            "type": "string",
+            "description": "New email address"
+          }
+        },
+        "required": [
+          "currentAccessKey",
+          "newAccessKey"
+        ]
+      },
+      "EmailVerificationStartRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "EmailVerificationRequest": {
+        "type": "object",
+        "properties": {
+          "verificationToken": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 64
+          }
+        },
+        "required": [
+          "verificationToken"
+        ]
+      },
+      "AccountInformationResponse": {
+        "type": "object",
+        "properties": {
+          "emailVerified": {
+            "type": "boolean"
+          },
+          "emailVerificationLetterSent": {
+            "type": "boolean"
+          },
+          "trialActivated": {
+            "type": "boolean"
+          },
+          "trialActionsLeft": {
+            "type": "number"
+          },
+          "accountCreatedAt": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "emailVerified",
+          "emailVerificationLetterSent",
+          "trialActivated",
+          "trialActionsLeft",
+          "accountCreatedAt"
+        ]
+      },
+      "DeletionStartRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Target email for account deletion"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "DeletionFinishRequest": {
+        "type": "object",
+        "properties": {
+          "deletionToken": {
+            "type": "string",
+            "minLength": 16,
+            "description": "Deletion token provided in the email letter"
+          }
+        },
+        "required": [
+          "deletionToken"
+        ]
+      },
+      "RecoveryStartRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Target email for account recovery"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "RecoveryFinishRequest": {
+        "type": "object",
+        "properties": {
+          "recoveryToken": {
+            "type": "string",
+            "minLength": 16,
+            "description": "Recovery token provided in the email letter"
+          },
+          "newAccessKey": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 64,
+            "description": "New access key"
+          },
+          "deleteContent": {
+            "type": "boolean",
+            "description": "Should the server reset keystore and remove objects of stories and storycontent type?",
+            "default": false
+          }
+        },
+        "required": [
+          "recoveryToken",
+          "newAccessKey",
+          "deleteContent"
+        ]
+      },
+      "PriorityResponse": {
+        "type": "object",
+        "properties": {
+          "maxPriorityActions": {
+            "type": "number"
+          },
+          "nextRefillAt": {
+            "type": "number"
+          },
+          "taskPriority": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "maxPriorityActions",
+          "nextRefillAt",
+          "taskPriority"
+        ]
+      },
+      "SubscriptionTierPerks": {
+        "type": "object",
+        "properties": {
+          "maxPriorityActions": {
+            "type": "number",
+            "description": "Amount of max priority actions"
+          },
+          "startPriority": {
+            "type": "number",
+            "description": "Start priority amount"
+          },
+          "contextTokens": {
+            "type": "number",
+            "description": "Amount of granted context tokens"
+          },
+          "unlimitedMaxPriority": {
+            "type": "boolean",
+            "description": "Is max priority unlimited"
+          },
+          "moduleTrainingSteps": {
+            "type": "number",
+            "description": "Amount of module training steps granted every month"
+          }
+        },
+        "required": [
+          "maxPriorityActions",
+          "startPriority",
+          "contextTokens",
+          "unlimitedMaxPriority",
+          "moduleTrainingSteps"
+        ]
+      },
+      "SubscriptionAvailableTrainingSteps": {
+        "type": "object",
+        "properties": {
+          "fixedTrainingStepsLeft": {
+            "type": "number",
+            "description": "Amount of available fixed module training steps left (reset every month)"
+          },
+          "purchasedTrainingSteps": {
+            "type": "number",
+            "description": "Amount of available purchased module training steps left"
+          }
+        },
+        "required": [
+          "fixedTrainingStepsLeft",
+          "purchasedTrainingSteps"
+        ]
+      },
+      "SubscriptionResponse": {
+        "type": "object",
+        "properties": {
+          "tier": {
+            "type": "number",
+            "description": "Subscription internal tier number, see SubscriptionTiers enum"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Is subscription active as of the moment of the request"
+          },
+          "expiresAt": {
+            "type": "number",
+            "description": "UNIX timestamp of subscription expiration"
+          },
+          "perks": {
+            "description": "Subscription perks",
+            "allOf": [{
+              "$ref": "#/components/schemas/SubscriptionTierPerks"
+            }]
+          },
+          "paymentProcessorData": {
+            "type": "object",
+            "description": "Payment processor arbitrary data"
+          },
+          "trainingStepsLeft": {
+            "description": "Amount of available module training steps left",
+            "allOf": [{
+              "$ref": "#/components/schemas/SubscriptionAvailableTrainingSteps"
+            }]
+          }
+        },
+        "required": [
+          "tier",
+          "active",
+          "expiresAt",
+          "perks",
+          "paymentProcessorData",
+          "trainingStepsLeft"
+        ]
+      },
+      "GetKeystoreResponse": {
+        "type": "object",
+        "properties": {
+          "keystore": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "keystore"
+        ]
+      },
+      "UserAccountDataResponse": {
+        "type": "object",
+        "properties": {
+          "priority": {
+            "$ref": "#/components/schemas/PriorityResponse"
+          },
+          "subscription": {
+            "$ref": "#/components/schemas/SubscriptionResponse"
+          },
+          "keystore": {
+            "$ref": "#/components/schemas/GetKeystoreResponse"
+          },
+          "settings": {
+            "type": "string",
+            "nullable": true
+          },
+          "information": {
+            "$ref": "#/components/schemas/AccountInformationResponse"
+          }
+        },
+        "required": [
+          "priority",
+          "subscription",
+          "keystore",
+          "settings",
+          "information"
+        ]
+      },
+      "GiftKeysResponse": {
+        "type": "object",
+        "properties": {
+          "giftKeys": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "required": [
+          "giftKeys"
+        ]
+      },
+      "UpdateKeystoreRequest": {
+        "type": "object",
+        "properties": {
+          "keystore": {
+            "type": "string",
+            "description": "Base64-encoded keystore (or empty string to clear)"
+          },
+          "changeIndex": {
+            "type": "number",
+            "description": "Current change index"
+          }
+        },
+        "required": [
+          "keystore"
+        ]
+      },
+      "UserData": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Object ID"
+          },
+          "meta": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "Accompanying non confidential information"
+          },
+          "data": {
+            "type": "string",
+            "description": "Base64-encoded buffer"
+          },
+          "lastUpdatedAt": {
+            "type": "number",
+            "description": "UNIX timestamp"
+          },
+          "changeIndex": {
+            "type": "number",
+            "description": "Incremental revision of the object"
+          },
+          "type": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 16
+          }
+        },
+        "required": [
+          "id",
+          "meta",
+          "data",
+          "lastUpdatedAt",
+          "changeIndex",
+          "type"
+        ]
+      },
+      "ObjectsResponse": {
+        "type": "object",
+        "properties": {
+          "objects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserData"
+            }
+          }
+        },
+        "required": [
+          "objects"
+        ]
+      },
+      "UserDataInput": {
+        "type": "object",
+        "properties": {
+          "meta": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "Accompanying non confidential information"
+          },
+          "data": {
+            "type": "string",
+            "description": "Base64-encoded buffer"
+          },
+          "changeIndex": {
+            "type": "number",
+            "description": "Current change index"
+          }
+        },
+        "required": [
+          "meta",
+          "data"
+        ]
+      },
+      "UserSubmissionInput": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "Base64-encoded buffer"
+          },
+          "dataName": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "authorName": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "authorEmail": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "socials": {
+            "type": "string",
+            "maxLength": 4096
+          },
+          "mediums": {
+            "type": "string",
+            "maxLength": 4096
+          },
+          "event": {
+            "type": "string",
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "data",
+          "dataName",
+          "authorName",
+          "authorEmail",
+          "socials",
+          "mediums",
+          "event"
+        ]
+      },
+      "UserSubmissionVoteInput": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "BindSubscriptionRequest": {
+        "type": "object",
+        "properties": {
+          "paymentProcessor": {
+            "type": "string",
+            "enum": [
+              "paddle",
+              "giftkey",
+              "trial"
+            ],
+            "description": "Subscription payment processor"
+          },
+          "subscriptionId": {
+            "type": "string",
+            "description": "Payment processor ID"
+          }
+        },
+        "required": [
+          "paymentProcessor",
+          "subscriptionId"
+        ]
+      },
+      "ChangeSubscriptionPlanRequest": {
+        "type": "object",
+        "properties": {
+          "newSubscriptionPlan": {
+            "enum": [
+              "NONE",
+              "TABLET",
+              "SCROLL",
+              "OPUS"
+            ],
+            "type": "number",
+            "description": "New plan SKU"
+          }
+        },
+        "required": [
+          "newSubscriptionPlan"
+        ]
+      },
+      "AiGenerateParameters": {
+        "type": "object",
+        "properties": {
+          "stop_sequences": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32",
+                "minimum": 0
+              }
+            }
+          },
+          "bad_words_ids": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32",
+                "minimum": 0
+              }
+            }
+          },
+          "use_string": {
+            "type": "boolean",
+            "description": "If false, input and output strings should be Base64-encoded uint16 numbers representing tokens",
+            "default": false
+          },
+          "logit_bias": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int32",
+                "minimum": 0
+              },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "logit_bias_exp": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "sequence": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": 0
+                  },
+                  "minItems": 1
+                },
+                "bias": {
+                  "type": "number",
+                  "format": "float"
+                },
+                "ensure_sequence_finish": {
+                  "type": "boolean"
+                },
+                "generate_once": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "sequence",
+                "bias"
+              ]
+            },
+            "example": [{
+                "sequence": [
+                  9288,
+                  286,
+                  10690
+                ],
+                "bias": 4,
+                "ensure_sequence_finish": true,
+                "generate_once": true
+              },
+              {
+                "sequence": [
+                  9288,
+                  286
+                ],
+                "bias": 2
+              }
+            ]
+          },
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            },
+            "minItems": 0,
+            "maxItems": 6
+          },
+          "repetition_penalty_whitelist": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 0
+            }
+          },
+          "temperature": {
+            "type": "number",
+            "minimum": 0.1,
+            "maximum": 100
+          },
+          "min_length": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 2048
+          },
+          "max_length": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 2048
+          },
+          "do_sample": {
+            "type": "boolean"
+          },
+          "early_stopping": {
+            "type": "boolean"
+          },
+          "num_beams": {
+            "type": "number"
+          },
+          "top_k": {
+            "type": "number"
+          },
+          "top_a": {
+            "type": "number"
+          },
+          "top_p": {
+            "type": "number"
+          },
+          "typical_p": {
+            "type": "number"
+          },
+          "repetition_penalty": {
+            "type": "number"
+          },
+          "pad_token_id": {
+            "type": "number"
+          },
+          "bos_token_id": {
+            "type": "number"
+          },
+          "eos_token_id": {
+            "type": "number"
+          },
+          "length_penalty": {
+            "type": "number"
+          },
+          "no_repeat_ngram_size": {
+            "type": "number"
+          },
+          "encoder_no_repeat_ngram_size": {
+            "type": "number"
+          },
+          "num_return_sequences": {
+            "type": "number"
+          },
+          "max_time": {
+            "type": "number"
+          },
+          "use_cache": {
+            "type": "boolean"
+          },
+          "num_beam_groups": {
+            "type": "number"
+          },
+          "diversity_penalty": {
+            "type": "number"
+          },
+          "tail_free_sampling": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "repetition_penalty_range": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 2048
+          },
+          "repetition_penalty_slope": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "get_hidden_states": {
+            "type": "boolean"
+          },
+          "repetition_penalty_frequency": {
+            "type": "number",
+            "minimum": -2,
+            "maximum": 2
+          },
+          "repetition_penalty_presence": {
+            "type": "number",
+            "minimum": -2,
+            "maximum": 2
+          },
+          "next_word": {
+            "type": "boolean"
+          },
+          "prefix": {
+            "type": "string"
+          },
+          "output_nonzero_probs": {
+            "type": "boolean"
+          },
+          "generate_until_sentence": {
+            "type": "boolean"
+          },
+          "num_logprobs": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 30
+          }
+        },
+        "required": [
+          "min_length",
+          "max_length"
+        ]
+      },
+      "AiGenerateRequest": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 14000,
+            "description": "Input for the text generation model",
+            "example": "Text generation example."
+          },
+          "model": {
+            "default": "euterpe-v2",
+            "enum": [
+              "2.7B",
+              "6B-v4",
+              "euterpe-v2",
+              "genji-python-6b",
+              "genji-jp-6b",
+              "genji-jp-6b-v2",
+              "krake-v2",
+              "hypebot",
+              "infillmodel"
+            ],
+            "type": "string",
+            "description": "Used text generation model"
+          },
+          "parameters": {
+            "description": "Generation parameters",
+            "example": {
+              "use_string": true,
+              "temperature": 1,
+              "min_length": 10,
+              "max_length": 30
+            },
+            "allOf": [{
+              "$ref": "#/components/schemas/AiGenerateParameters"
+            }]
+          }
+        },
+        "required": [
+          "input",
+          "model",
+          "parameters"
+        ]
+      },
+      "AiGenerateResponse": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "type": "string",
+            "description": "Output from the text generation model, if defined"
+          },
+          "error": {
+            "type": "string",
+            "description": "Error from the generation node, if defined"
+          }
+        }
+      },
+      "AiGenerateStreamableResponse": {
+        "type": "object",
+        "properties": {
+          "ptr": {
+            "type": "number",
+            "description": "Incrementing token pointer"
+          },
+          "token": {
+            "type": "string",
+            "description": "Generated token"
+          },
+          "final": {
+            "type": "boolean",
+            "description": "Set to true if the token is final and the generation ended"
+          },
+          "error": {
+            "type": "string",
+            "description": "Error from the generation node, if defined. Usually means the end of stream"
+          }
+        }
+      },
+      "AiSequenceClassificationResponse": {
+        "type": "object",
+        "properties": {
+          "output": {
+            "description": "Output, if defined",
+            "anyOf": [{
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string"
+                    },
+                    "score": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "scores": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            ],
+            "example": [
+              [{
+                "label": "label",
+                "score": 0
+              }],
+              {
+                "scores": [
+                  [
+                    0.9600785970687866,
+                    0.01683211140334606,
+                    0.014393973164260387,
+                    0.008695312775671482
+                  ]
+                ]
+              }
+            ]
+          },
+          "error": {
+            "type": "string",
+            "description": "Error, if defined"
+          }
+        }
+      },
+      "AiRequestImageGenerationTag": {
+        "type": "object",
+        "properties": {
+          "tag": {
+            "type": "string"
+          },
+          "count": {
+            "type": "number"
+          },
+          "confidence": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "tag",
+          "count",
+          "confidence"
+        ]
+      },
+      "AiRequestImageGenerationTagsResponse": {
+        "type": "object",
+        "properties": {
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AiRequestImageGenerationTag"
+            }
+          }
+        },
+        "required": [
+          "tags"
+        ]
+      },
+      "AiModuleTrainRequest": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "Base64-encoded data if ready or it's a training request, error text if error"
+          },
+          "lr": {
+            "type": "number",
+            "description": "Learning rate"
+          },
+          "steps": {
+            "type": "number",
+            "description": "Training steps"
+          },
+          "model": {
+            "type": "string",
+            "description": "Used text generation model for module training",
+            "default": "euterpe-v2"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "data",
+          "lr",
+          "steps",
+          "model",
+          "name",
+          "description"
+        ]
+      },
+      "AiModuleDto": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "Base64-encoded data if ready or it's a training request, error text if error"
+          },
+          "lr": {
+            "type": "number",
+            "description": "Learning rate"
+          },
+          "steps": {
+            "type": "number",
+            "description": "Training steps"
+          },
+          "model": {
+            "type": "string",
+            "description": "Used text generation model for module training",
+            "default": "euterpe-v2"
+          },
+          "lastUpdatedAt": {
+            "type": "number",
+            "description": "UNIX timestamp"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "training",
+              "ready",
+              "error"
+            ]
+          },
+          "lossHistory": {
+            "description": "Recorded loss values",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "data",
+          "lr",
+          "steps",
+          "model",
+          "lastUpdatedAt",
+          "status",
+          "lossHistory",
+          "id",
+          "name",
+          "description"
+        ]
+      },
+      "BuyTrainingStepsRequest": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "minimum": 2000,
+            "maximum": 10000,
+            "description": "Amount of module training steps to purchase."
+          }
+        },
+        "required": [
+          "amount"
+        ]
+      }
+    }
+  }
+ }
