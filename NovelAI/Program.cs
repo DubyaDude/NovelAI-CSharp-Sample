@@ -11,7 +11,6 @@ var authResp = await novelAI.UserLoginAsync(new LoginRequest() { Key = NovelUtil
 // Logging in
 var authResp = await novelAI.UserLoginAsync(new LoginRequest() { Key = NovelUtils.GenerateLoginString(email, password) });
 Console.WriteLine("Got AccessToken: " + authResp.AccessToken);
-Console.WriteLine();
 
 // Getting current subscription
 var userResp = await novelAI.UserSubscriptionAsync();
