@@ -2134,10 +2134,10 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "The output has been successfully generated.",
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AiGenerateImagePriceResponse"
                 }
@@ -3687,29 +3687,32 @@
             "description": "Plan to base price request off of"
           },
           "request": {
-            "input": {
-              "type": "array",
-              "items": {
+            "type": "object",
+            "properties": {
+              "input": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minimum": 0,
+                  "default": "User model input"
+                }
+              },
+              "model": {
+                "default": "safe-diffusion",
+                "enum": [
+                  "safe-diffusion",
+                  "nai-diffusion",
+                  "nai-diffusion-furry"
+                ],
                 "type": "string",
-                "minimum": 0,
-                "default": "User model input"
+                "description": "Used image generation model"
+              },
+              "parameters": {
+                "description": "Generation parameters",
+                "allOf": [{
+                  "$ref": "#/components/schemas/AiGenerateImageParameters"
+                }]
               }
-            },
-            "model": {
-              "default": "safe-diffusion",
-              "enum": [
-                "safe-diffusion",
-                "nai-diffusion",
-                "nai-diffusion-furry"
-              ],
-              "type": "string",
-              "description": "Used image generation model"
-            },
-            "parameters": {
-              "description": "Generation parameters",
-              "allOf": [{
-                "$ref": "#/components/schemas/AiGenerateImageParameters"
-              }]
             }
           }
         }
