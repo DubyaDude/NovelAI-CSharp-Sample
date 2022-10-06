@@ -46,5 +46,12 @@ if (imagePriceResp.RequestEligibleForUnlimitedGeneration || imagePriceResp.CostP
     // event: newImage
     // id: 1
     // data: ACTUAL-IMAGE-DATA
-    Console.WriteLine("Got Image Resp: \n" + imageResp);
+    string? imageRespStr = imageResp.ToString();
+    if (imageRespStr != null)
+    {
+        Console.WriteLine("Got Image Resp: \n" + imageRespStr);
+        
+        var image = Convert.FromBase64String(imageRespStr.Split("data:")[1]);
+        File.WriteAllBytes("image.png", image);
+    }
 }
