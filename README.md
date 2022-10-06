@@ -1,0 +1,3 @@
+# NovelAI-Sharp
+
+Repo WIP
