@@ -4,9 +4,12 @@ using NovelAI.OpenApi;
 string email = "notarealemail@gmail.com";
 string password = "notarealpassword";
 
+// Setting up the client
 NovelClient novelAI = new NovelClient("https://api.novelai.net/", new HttpClient());
 var authResp = await novelAI.UserLoginAsync(new LoginRequest() { Key = NovelUtils.GenerateLoginString(email, password) });
 
+// Logging in
+var authResp = await novelAI.UserLoginAsync(new LoginRequest() { Key = NovelUtils.GenerateLoginString(email, password) });
 Console.WriteLine("Got AccessToken: " + authResp.AccessToken);
 Console.WriteLine();
 
@@ -15,8 +18,12 @@ var userResp = await novelAI.UserSubscriptionAsync();
 Console.WriteLine("Got Account Tier: " + userResp.Tier);
 
 // Setting up image we want to generate
-var imageParameters = new AiGenerateImageParameters();
+var imageParameters = new AiGenerateImageParameters()
+{
+    // Put parameters here (width, heignt, etc)
+};
 var userInput = "anime girl";
+var model = AiGenerateImageModals.NaiDiffusion;
 
 // Getting price of image
 var imagePriceResp = await novelAI.AiGenerateImageRequestPriceAsync(new AiGenerateImagePriceRequest()
@@ -25,7 +32,7 @@ var imagePriceResp = await novelAI.AiGenerateImageRequestPriceAsync(new AiGenera
     Request = new Request()
     {
         Input = new string[] { userInput },
-        Model = AiGenerateImageModals.NaiDiffusion,
+        Model = model,
         Parameters = imageParameters,
     }
 });
@@ -37,7 +44,7 @@ if (imagePriceResp.RequestEligibleForUnlimitedGeneration || imagePriceResp.CostP
     var imageResp = await novelAI.AiGenerateImageAsync(new AiGenerateImageRequest()
     {
         Input = userInput,
-        Model = AiGenerateImageModals.NaiDiffusion,
+        Model = model,
         Parameters = imageParameters,
     });
 
