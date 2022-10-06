@@ -2037,6 +2037,172 @@
         }]
       }
     },
+    "/ai/generate-image": {
+      "post": {
+        "operationId": "AIController_aiGenerateImage",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AiGenerateImageRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The output has been successfully generated.",
+            "content": {
+              "text/plain": {
+                "schema": { }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "An active subscription is required to access this endpoint.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/ai/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
+    "/ai/generate-image/request-price": {
+      "post": {
+        "operationId": "AIController_aiGenerateImageRequestPrice",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AiGenerateImagePriceRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The output has been successfully generated.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AiGenerateImagePriceResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Access Token is incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "An active subscription is required to access this endpoint.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A conflict error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "An unknown error occured.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "/ai/"
+        ],
+        "security": [{
+          "bearer": []
+        }]
+      }
+    },
     "/ai/generate-image/suggest-tags": {
       "get": {
         "operationId": "AIController_generateImageTags",
@@ -3386,6 +3552,183 @@
           "error": {
             "type": "string",
             "description": "Error from the generation node, if defined. Usually means the end of stream"
+          }
+        }
+      },
+      "AiGenerateImageParameters": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 512,
+            "maximum": 2048,
+            "default": 512
+          },
+          "height": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 512,
+            "maximum": 2048,
+            "default": 512
+          },
+          "scale": {
+            "type": "number",
+            "format": "float",
+            "minimum": 1.1,
+            "maximum": 100,
+            "default": 12
+          },
+          "sampler": {
+            "type": "string",
+            "enum": [
+              "k_euler_ancestral",
+              "k_euler",
+              "k_lms",
+              "plms",
+              "ddim"
+            ],
+            "default": "k_euler_ancestral"
+          },
+          "steps": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 50,
+            "default": 28
+          },
+          "seed": {
+            "type": "integer",
+            "format": "uint32"
+          },
+          "n_samples": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 4,
+            "default": 1
+          },
+          "strength": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 0.9999999999999999,
+            "default": 0.7
+          },
+          "noise": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0.2
+          },
+          "ucPreset": {
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              0,
+              1,
+              2
+            ],
+            "default": 0
+          },
+          "uc": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 14000,
+            "default": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry"
+          }
+        }
+      },
+      "AiGenerateImageRequest": {
+        "type": "object",
+        "properties": {
+          "input": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 14000,
+            "description": "Input for the image generation model",
+            "example": "Image generation example."
+          },
+          "model": {
+            "default": "safe-diffusion",
+            "enum": [
+              "safe-diffusion",
+              "nai-diffusion",
+              "nai-diffusion-furry"
+            ],
+            "type": "string",
+            "description": "Used image generation model"
+          },
+          "parameters": {
+            "description": "Generation parameters",
+            "allOf": [{
+              "$ref": "#/components/schemas/AiGenerateImageParameters"
+            }]
+          }
+        },
+        "required": [
+          "input",
+          "model",
+          "parameters"
+        ]
+      },
+      "AiGenerateImagePriceRequest": {
+        "type": "object",
+        "properties": {
+          "tier": {
+            "default": "OPUS",
+            "enum": [
+              "TABLET",
+              "SCROLL",
+              "OPUS"
+            ],
+            "type": "string",
+            "description": "Plan to base price request off of"
+          },
+          "input": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minimum": 0,
+              "default": "User model input, yes it's in an array for some reason"
+            }
+          },
+          "model": {
+            "default": "safe-diffusion",
+            "enum": [
+              "safe-diffusion",
+              "nai-diffusion",
+              "nai-diffusion-furry"
+            ],
+            "type": "string",
+            "description": "Used image generation model"
+          },
+          "parameters": {
+            "description": "Generation parameters",
+            "allOf": [{
+              "$ref": "#/components/schemas/AiGenerateImageParameters"
+            }]
+          }
+        }
+      },
+      "AiGenerateImagePriceResponse": {
+        "type": "object",
+        "properties": {
+          "costPerPrompt": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numPrompts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requestEligibleForUnlimitedGeneration": {
+            "type": "boolean"
+          },
+          "freePrompts": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
