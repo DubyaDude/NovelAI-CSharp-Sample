@@ -3952,7 +3952,7 @@ namespace NovelAI.OpenApi
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -3975,11 +3975,14 @@ namespace NovelAI.OpenApi
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 201)
+                        if (status_ == 200)
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = (AiGenerateImagePriceResponse)System.Convert.ChangeType(responseData_, typeof(AiGenerateImagePriceResponse));
-                            return result_;
+                            var objectResponse_ = await ReadObjectResponseAsync<AiGenerateImagePriceResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 400)
@@ -6007,6 +6010,24 @@ namespace NovelAI.OpenApi
 
     }
 
+    /// <summary>
+    /// Used image generation model
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AiGenerateImageModals
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"safe-diffusion")]
+        SafeDiffusion = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nai-diffusion")]
+        NaiDiffusion = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nai-diffusion-furry")]
+        NaiDiffusionFurry = 2,
+
+    }
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AiGenerateImageRequest
     {
@@ -6018,13 +6039,10 @@ namespace NovelAI.OpenApi
         [System.ComponentModel.DataAnnotations.StringLength(14000, MinimumLength = 1)]
         public string Input { get; set; }
 
-        /// <summary>
-        /// Used image generation model
-        /// </summary>
         [Newtonsoft.Json.JsonProperty("model", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AiGenerateImageRequestModel Model { get; set; } = NovelAI.OpenApi.AiGenerateImageRequestModel.SafeDiffusion;
+        public AiGenerateImageModals Model { get; set; }
 
         /// <summary>
         /// Generation parameters
@@ -6054,21 +6072,8 @@ namespace NovelAI.OpenApi
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public AiGenerateImagePriceRequestTier Tier { get; set; } = NovelAI.OpenApi.AiGenerateImagePriceRequestTier.OPUS;
 
-        [Newtonsoft.Json.JsonProperty("input", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<string> Input { get; set; }
-
-        /// <summary>
-        /// Used image generation model
-        /// </summary>
-        [Newtonsoft.Json.JsonProperty("model", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public AiGenerateImagePriceRequestModel Model { get; set; } = NovelAI.OpenApi.AiGenerateImagePriceRequestModel.SafeDiffusion;
-
-        /// <summary>
-        /// Generation parameters
-        /// </summary>
-        [Newtonsoft.Json.JsonProperty("parameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public AiGenerateImageParameters Parameters { get; set; }
+        [Newtonsoft.Json.JsonProperty("request", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Request Request { get; set; }
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
@@ -6428,21 +6433,6 @@ namespace NovelAI.OpenApi
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AiGenerateImageRequestModel
-    {
-
-        [System.Runtime.Serialization.EnumMember(Value = @"safe-diffusion")]
-        SafeDiffusion = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"nai-diffusion")]
-        NaiDiffusion = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"nai-diffusion-furry")]
-        NaiDiffusionFurry = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public enum AiGenerateImagePriceRequestTier
     {
 
@@ -6458,17 +6448,29 @@ namespace NovelAI.OpenApi
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public enum AiGenerateImagePriceRequestModel
+    public partial class Request
     {
+        [Newtonsoft.Json.JsonProperty("input", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<string> Input { get; set; }
 
-        [System.Runtime.Serialization.EnumMember(Value = @"safe-diffusion")]
-        SafeDiffusion = 0,
+        [Newtonsoft.Json.JsonProperty("model", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public AiGenerateImageModals Model { get; set; }
 
-        [System.Runtime.Serialization.EnumMember(Value = @"nai-diffusion")]
-        NaiDiffusion = 1,
+        /// <summary>
+        /// Generation parameters
+        /// </summary>
+        [Newtonsoft.Json.JsonProperty("parameters", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public AiGenerateImageParameters Parameters { get; set; }
 
-        [System.Runtime.Serialization.EnumMember(Value = @"nai-diffusion-furry")]
-        NaiDiffusionFurry = 2,
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
+
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties ?? (_additionalProperties = new System.Collections.Generic.Dictionary<string, object>()); }
+            set { _additionalProperties = value; }
+        }
 
     }
 
