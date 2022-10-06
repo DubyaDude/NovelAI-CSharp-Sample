@@ -3686,29 +3686,31 @@
             "type": "string",
             "description": "Plan to base price request off of"
           },
-          "input": {
-            "type": "array",
-            "items": {
+          "request": {
+            "input": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minimum": 0,
+                "default": "User model input"
+              }
+            },
+            "model": {
+              "default": "safe-diffusion",
+              "enum": [
+                "safe-diffusion",
+                "nai-diffusion",
+                "nai-diffusion-furry"
+              ],
               "type": "string",
-              "minimum": 0,
-              "default": "User model input, yes it's in an array for some reason"
+              "description": "Used image generation model"
+            },
+            "parameters": {
+              "description": "Generation parameters",
+              "allOf": [{
+                "$ref": "#/components/schemas/AiGenerateImageParameters"
+              }]
             }
-          },
-          "model": {
-            "default": "safe-diffusion",
-            "enum": [
-              "safe-diffusion",
-              "nai-diffusion",
-              "nai-diffusion-furry"
-            ],
-            "type": "string",
-            "description": "Used image generation model"
-          },
-          "parameters": {
-            "description": "Generation parameters",
-            "allOf": [{
-              "$ref": "#/components/schemas/AiGenerateImageParameters"
-            }]
           }
         }
       },
