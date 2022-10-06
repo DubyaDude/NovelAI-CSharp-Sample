@@ -13,10 +13,4 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Blake2Sharp">
-      <HintPath>..\libs\Blake2Sharp.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
