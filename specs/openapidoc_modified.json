@@ -3640,6 +3640,16 @@
           }
         }
       },
+      "AiGenerateImageModals": {
+          "type": "string",
+          "description": "Used image generation model",
+          "default": "safe-diffusion",
+          "enum": [
+            "safe-diffusion",
+            "nai-diffusion",
+            "nai-diffusion-furry"
+          ]
+      },
       "AiGenerateImageRequest": {
         "type": "object",
         "properties": {
@@ -3651,14 +3661,7 @@
             "example": "Image generation example."
           },
           "model": {
-            "default": "safe-diffusion",
-            "enum": [
-              "safe-diffusion",
-              "nai-diffusion",
-              "nai-diffusion-furry"
-            ],
-            "type": "string",
-            "description": "Used image generation model"
+            "$ref": "#/components/schemas/AiGenerateImageModals"
           },
           "parameters": {
             "description": "Generation parameters",
@@ -3698,14 +3701,7 @@
                 }
               },
               "model": {
-                "default": "safe-diffusion",
-                "enum": [
-                  "safe-diffusion",
-                  "nai-diffusion",
-                  "nai-diffusion-furry"
-                ],
-                "type": "string",
-                "description": "Used image generation model"
+                "$ref": "#/components/schemas/AiGenerateImageModals"
               },
               "parameters": {
                 "description": "Generation parameters",
