@@ -3856,12 +3856,9 @@ namespace NovelAI.OpenApi
                         else
                         if (status_ == 400)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<ApiError>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            throw new ApiException<ApiError>("A validation error occured.", status_, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = (object)System.Convert.ChangeType(responseData_, typeof(object));
+                            throw new ApiException<object>("A validation error occured.", status_, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ == 401)

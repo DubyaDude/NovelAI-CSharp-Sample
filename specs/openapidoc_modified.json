@@ -2063,10 +2063,8 @@
           "400": {
             "description": "A validation error occured.",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
+              "text/plain": {
+                "schema": { }
               }
             }
           },
