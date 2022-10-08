@@ -2147,10 +2147,8 @@
           "400": {
             "description": "A validation error occured.",
             "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
+              "text/plain": {
+                "schema": { }
               }
             }
           },
@@ -2211,7 +2209,7 @@
             "required": true,
             "in": "query",
             "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/AiGenerateImageModals"
             }
           },
           {
@@ -2231,6 +2229,14 @@
                 "schema": {
                   "$ref": "#/components/schemas/AiRequestImageGenerationTagsResponse"
                 }
+              }
+            }
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "text/plain": {
+                "schema": { }
               }
             }
           },
@@ -2310,6 +2316,14 @@
         "responses": {
           "200": {
             "description": ""
+          },
+          "400": {
+            "description": "A validation error occured.",
+            "content": {
+              "text/plain": {
+                "schema": { }
+              }
+            }
           },
           "401": {
             "description": "Access Token is incorrect.",
