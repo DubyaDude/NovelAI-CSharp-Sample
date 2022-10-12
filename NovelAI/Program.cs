@@ -5,7 +5,7 @@ string email = "notarealemail@gmail.com";
 string password = "notarealpassword";
 
 // Setting up the client
-NovelClient novelAI = new NovelClient("https://api.novelai.net/", new HttpClient());
+NovelClient novelAI = new NovelClient(new HttpClient());
 
 // Logging in
 var authResp = await novelAI.UserLoginAsync(new LoginRequest() { Key = NovelUtils.GenerateLoginString(email, password) });

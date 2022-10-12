@@ -10,7 +10,7 @@ namespace NovelAI
 {
     public class NovelClient : NovelClientBase
     {
-        public NovelClient(string baseUrl, HttpClient httpClient) : base(baseUrl, httpClient)
+        public NovelClient(HttpClient httpClient) : base(httpClient)
         {
         }
 

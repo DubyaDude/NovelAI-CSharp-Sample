@@ -20,13 +20,12 @@ namespace NovelAI.OpenApi
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class NovelClientBase
     {
-        protected string _baseUrl = "";
+        protected string _baseUrl = "https://api.novelai.net";
         protected System.Net.Http.HttpClient _httpClient;
         protected System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
 
-        public NovelClientBase(string baseUrl, System.Net.Http.HttpClient httpClient)
+        public NovelClientBase(System.Net.Http.HttpClient httpClient)
         {
-            BaseUrl = baseUrl;
             _httpClient = httpClient;
             _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
         }
@@ -5966,12 +5965,10 @@ namespace NovelAI.OpenApi
     public partial class AiGenerateImageParameters
     {
         [Newtonsoft.Json.JsonProperty("width", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.Range(512, 2048)]
-        public int Width { get; set; } = 512;
+        public AiGenerateImageDimension Width { get; set; }
 
         [Newtonsoft.Json.JsonProperty("height", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [System.ComponentModel.DataAnnotations.Range(512, 2048)]
-        public int Height { get; set; } = 512;
+        public AiGenerateImageDimension Height { get; set; }
 
         [Newtonsoft.Json.JsonProperty("scale", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(1.1D, 100D)]
@@ -5986,7 +5983,8 @@ namespace NovelAI.OpenApi
         public int Steps { get; set; } = 28;
 
         [Newtonsoft.Json.JsonProperty("seed", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Seed { get; set; }
+        [System.ComponentModel.DataAnnotations.Range(0D, 4294967295D)]
+        public long Seed { get; set; }
 
         [Newtonsoft.Json.JsonProperty("n_samples", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(1, 4)]
@@ -6033,6 +6031,79 @@ namespace NovelAI.OpenApi
 
         [System.Runtime.Serialization.EnumMember(Value = @"nai-diffusion-furry")]
         NaiDiffusionFurry = 2,
+
+    }
+
+    /// <summary>
+    /// Dimension in pixels of the generated image
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AiGenerateImageDimension
+    {
+
+        _64 = 64,
+
+        _128 = 128,
+
+        _192 = 192,
+
+        _256 = 256,
+
+        _320 = 320,
+
+        _384 = 384,
+
+        _448 = 448,
+
+        _512 = 512,
+
+        _576 = 576,
+
+        _640 = 640,
+
+        _704 = 704,
+
+        _768 = 768,
+
+        _832 = 832,
+
+        _896 = 896,
+
+        _960 = 960,
+
+        _1024 = 1024,
+
+        _1088 = 1088,
+
+        _1152 = 1152,
+
+        _1216 = 1216,
+
+        _1280 = 1280,
+
+        _1344 = 1344,
+
+        _1408 = 1408,
+
+        _1472 = 1472,
+
+        _1536 = 1536,
+
+        _1600 = 1600,
+
+        _1664 = 1664,
+
+        _1728 = 1728,
+
+        _1792 = 1792,
+
+        _1856 = 1856,
+
+        _1920 = 1920,
+
+        _1984 = 1984,
+
+        _2048 = 2048,
 
     }
 
