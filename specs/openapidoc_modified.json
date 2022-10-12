@@ -2690,7 +2690,7 @@
   "tags": [],
   "servers": [
     {
-      "url": "https://api.novelai.com"
+      "url": "https://api.novelai.net"
     }
   ],
   "components": {
