@@ -2688,7 +2688,11 @@
     "contact": {}
   },
   "tags": [],
-  "servers": [],
+  "servers": [
+    {
+      "url": "https://api.novelai.com"
+    }
+  ],
   "components": {
     "securitySchemes": {
       "bearer": {
