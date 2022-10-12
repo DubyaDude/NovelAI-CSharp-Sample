@@ -3571,18 +3571,10 @@
         "type": "object",
         "properties": {
           "width": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 512,
-            "maximum": 2048,
-            "default": 512
+            "$ref": "#/components/schemas/AiGenerateImageDimension"
           },
           "height": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 512,
-            "maximum": 2048,
-            "default": 512
+            "$ref": "#/components/schemas/AiGenerateImageDimension"
           },
           "scale": {
             "type": "number",
@@ -3661,6 +3653,46 @@
             "nai-diffusion",
             "nai-diffusion-furry"
           ]
+      },
+      "AiGenerateImageDimension": {
+        "type": "integer",
+        "format": "int32",
+        "description": "Dimension in pixels of the generated image",
+        "default": 512,
+        "enum": [
+          64,
+          128,
+          192,
+          256,
+          320,
+          384,
+          448,
+          512,
+          576,
+          640,
+          704,
+          768,
+          832,
+          896,
+          960,
+          1024,
+          1088,
+          1152,
+          1216,
+          1280,
+          1344,
+          1408,
+          1472,
+          1536,
+          1600,
+          1664,
+          1728,
+          1792,
+          1856,
+          1920,
+          1984,
+          2048
+        ]
       },
       "AiGenerateImageRequest": {
         "type": "object",
