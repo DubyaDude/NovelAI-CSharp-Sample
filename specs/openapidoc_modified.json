@@ -2055,7 +2055,7 @@
           "201": {
             "description": "The output has been successfully generated.",
             "content": {
-              "text/plain": {
+              "text/event-stream": {
                 "schema": { }
               }
             }
