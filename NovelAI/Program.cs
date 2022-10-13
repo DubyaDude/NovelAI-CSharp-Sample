@@ -1,5 +1,6 @@
 ﻿using NovelAI;
 using NovelAI.OpenApi;
+using System.Diagnostics;
 
 string email = "notarealemail@gmail.com";
 string password = "notarealpassword";
@@ -19,6 +20,8 @@ Console.WriteLine("Got Account Tier: " + userResp.Tier);
 var imageParameters = new AiGenerateImageParameters()
 {
     // Put parameters here (width, heignt, etc)
+    Width = AiGenerateImageDimension._640,
+    Height = AiGenerateImageDimension._640,
 };
 var userInput = "anime girl";
 var model = AiGenerateImageModals.NaiDiffusion;
@@ -39,6 +42,10 @@ var imagePriceResp = await novelAI.AiGenerateImageRequestPriceAsync(new AiGenera
 if (imagePriceResp.RequestEligibleForUnlimitedGeneration || imagePriceResp.CostPerPrompt == 0)
 {
     Console.WriteLine("Image price free!");
+
+    Stopwatch stopwatch = new();
+    stopwatch.Start();
+    
     var imageResp = await novelAI.AiGenerateImageAsync(new AiGenerateImageRequest()
     {
         Input = userInput,
@@ -46,15 +53,23 @@ if (imagePriceResp.RequestEligibleForUnlimitedGeneration || imagePriceResp.CostP
         Parameters = imageParameters,
     });
 
+    stopwatch.Stop();
     // Format (raw string):
     //
     // event: newImage
     // id: 1
     // data: ACTUAL-IMAGE-DATA
-    string? imageRespStr = imageResp.ToString();
+    string imageRespStr = string.Empty;
+    using (var reader = new StreamReader(imageResp.Stream))
+    {
+        imageRespStr = reader.ReadToEnd();
+    }
+    imageResp.Dispose();
+
+
     if (imageRespStr != null)
     {
-        Console.WriteLine("Got Image Resp: \n" + imageRespStr);
+        Console.WriteLine($"Got Image Resp in {stopwatch.Elapsed.TotalSeconds} seconds: \n{imageRespStr}");
         
         var image = Convert.FromBase64String(imageRespStr.Split("data:")[1]);
         File.WriteAllBytes("image.png", image);
