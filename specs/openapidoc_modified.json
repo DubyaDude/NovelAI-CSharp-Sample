@@ -3594,7 +3594,9 @@
               "k_euler",
               "k_lms",
               "plms",
-              "ddim"
+              "ddim",
+              "nai_smea",
+              "nai_smea_dyn",
             ],
             "default": "k_euler_ancestral"
           },
