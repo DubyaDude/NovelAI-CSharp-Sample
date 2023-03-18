@@ -3587,6 +3587,10 @@
             "maximum": 100,
             "default": 12
           },
+          "qualityToggle": {
+            "type": "boolean",
+            "default": true
+          },
           "sampler": {
             "type": "string",
             "enum": [
@@ -3595,10 +3599,20 @@
               "k_lms",
               "plms",
               "ddim",
-              "nai_smea",
-              "nai_smea_dyn",
+              "k_dpm_2",
+              "k_dpmpp_2s_ancestral",
+              "k_dpmpp_sde",
+              "k_dpm_fast"
             ],
             "default": "k_euler_ancestral"
+          },
+          "sm": {
+            "type": "boolean",
+            "default": false
+          },
+          "sm_dyn": {
+            "type": "boolean",
+            "default": false
           },
           "steps": {
             "type": "integer",
