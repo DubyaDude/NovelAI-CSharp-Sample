@@ -5973,7 +5973,7 @@ namespace NovelAI.OpenApi
 
         [Newtonsoft.Json.JsonProperty("scale", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(1.1D, 100D)]
-        public float Scale { get; set; } = 12F;
+        public float Scale { get; set; } = 11F;
 
         [Newtonsoft.Json.JsonProperty("qualityToggle", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool QualityToggle { get; set; } = true;
@@ -6510,14 +6510,17 @@ namespace NovelAI.OpenApi
         [System.Runtime.Serialization.EnumMember(Value = @"k_dpm_2")]
         K_dpm_2 = 5,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"k_dpmpp_2m")]
+        K_dpmpp_2m = 6,
+
         [System.Runtime.Serialization.EnumMember(Value = @"k_dpmpp_2s_ancestral")]
-        K_dpmpp_2s_ancestral = 6,
+        K_dpmpp_2s_ancestral = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"k_dpmpp_sde")]
-        K_dpmpp_sde = 7,
+        K_dpmpp_sde = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"k_dpm_fast")]
-        K_dpm_fast = 8,
+        K_dpm_fast = 9,
 
     }
 

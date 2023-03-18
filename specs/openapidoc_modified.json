@@ -3585,7 +3585,7 @@
             "format": "float",
             "minimum": 1.1,
             "maximum": 100,
-            "default": 12
+            "default": 11
           },
           "qualityToggle": {
             "type": "boolean",
@@ -3600,6 +3600,7 @@
               "plms",
               "ddim",
               "k_dpm_2",
+              "k_dpmpp_2m",
               "k_dpmpp_2s_ancestral",
               "k_dpmpp_sde",
               "k_dpm_fast"
