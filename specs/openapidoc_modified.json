@@ -2052,6 +2052,14 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "The output has been successfully generated.",
+            "content": {
+              "application/x-zip-compressed": {
+                "schema": { }
+              }
+            }
+          },
           "201": {
             "description": "The output has been successfully generated.",
             "content": {

@@ -1,6 +1,7 @@
 ﻿using NovelAI;
 using NovelAI.OpenApi;
 using System.Diagnostics;
+using System.IO.Compression;
 
 string email = "notarealemail@gmail.com";
 string password = "notarealpassword";
@@ -54,24 +55,30 @@ if (imagePriceResp.RequestEligibleForUnlimitedGeneration || imagePriceResp.CostP
     });
 
     stopwatch.Stop();
-    // Format (raw string):
-    //
-    // event: newImage
-    // id: 1
-    // data: ACTUAL-IMAGE-DATA
-    string imageRespStr = string.Empty;
-    using (var reader = new StreamReader(imageResp.Stream))
+
+    var zipArchive = new ZipArchive(imageResp.Stream);
+    List<(string Name, byte[] Data)> images = new();
+    foreach(var entry in zipArchive.Entries)
     {
-        imageRespStr = reader.ReadToEnd();
+        using (var entryStream = entry.Open())
+        {
+            byte[] bytes;
+            using (var ms = new MemoryStream())
+    {
+                entryStream.CopyTo(ms);
+                bytes = ms.ToArray();
+            }
+
+            images.Add((entry.Name, bytes));
+        }
     }
     imageResp.Dispose();
 
-
-    if (imageRespStr != null)
+    foreach(var image in images)
     {
-        Console.WriteLine($"Got Image Resp in {stopwatch.Elapsed.TotalSeconds} seconds: \n{imageRespStr}");
-        
-        var image = Convert.FromBase64String(imageRespStr.Split("data:")[1]);
-        File.WriteAllBytes("image.png", image);
+        Console.WriteLine("Saving " + image.Name);
+        File.WriteAllBytes(image.Name, image.Data);
     }
+        
+    Console.WriteLine($"Got Image Resp in {stopwatch.Elapsed.TotalSeconds} seconds");
 }
