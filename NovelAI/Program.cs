@@ -58,10 +58,9 @@ if (imagePriceResp.RequestEligibleForUnlimitedGeneration || imagePriceResp.CostP
 
     var zipArchive = new ZipArchive(imageResp.Stream);
     List<(string Name, byte[] Data)> images = new();
-    foreach(var entry in zipArchive.Entries)
-    {
-        using (var entryStream = entry.Open())
+    foreach (var entry in zipArchive.Entries)
         {
+        using var entryStream = entry.Open();
             byte[] bytes;
             using (var ms = new MemoryStream())
     {
@@ -71,10 +70,9 @@ if (imagePriceResp.RequestEligibleForUnlimitedGeneration || imagePriceResp.CostP
 
             images.Add((entry.Name, bytes));
         }
-    }
     imageResp.Dispose();
 
-    foreach(var image in images)
+    foreach (var image in images)
     {
         Console.WriteLine("Saving " + image.Name);
         File.WriteAllBytes(image.Name, image.Data);
