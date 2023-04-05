@@ -6019,9 +6019,9 @@ namespace NovelAI.OpenApi
         [Newtonsoft.Json.JsonProperty("ucPreset", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public AiGenerateImageParametersUcPreset UcPreset { get; set; } = NovelAI.OpenApi.AiGenerateImageParametersUcPreset._0;
 
-        [Newtonsoft.Json.JsonProperty("uc", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("negative_prompt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(14000, MinimumLength = 1)]
-        public string Uc { get; set; } = "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry";
+        public string Negative_Prompt { get; set; } = "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry";
 
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties;
 
