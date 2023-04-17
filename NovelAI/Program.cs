@@ -24,7 +24,7 @@ var imageParameters = new AiGenerateImageParameters()
     Width = AiGenerateImageDimension._640,
     Height = AiGenerateImageDimension._640,
 };
-var userInput = "anime girl";
+var userInput = "masterpiece, best quality, fox girl, red, galaxy, space, planets";
 var model = AiGenerateImageModals.NaiDiffusion;
 
 // Getting price of image
