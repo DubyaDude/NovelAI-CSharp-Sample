@@ -44,39 +44,82 @@ if (imagePriceResp.RequestEligibleForUnlimitedGeneration || imagePriceResp.CostP
 {
     Console.WriteLine("Image price free!");
 
-    Stopwatch stopwatch = new();
-    stopwatch.Start();
-    
-    var imageResp = await novelAI.AiGenerateImageAsync(new AiGenerateImageRequest()
+    var imageRequest = new AiGenerateImageRequest()
     {
         Input = userInput,
         Model = model,
         Parameters = imageParameters,
-    });
+    };
 
-    stopwatch.Stop();
 
-    var zipArchive = new ZipArchive(imageResp.Stream);
+
+    Stopwatch stopwatch = new();
+    stopwatch.Restart();
+    Console.WriteLine($"Generating Image...");
+
+    string filePrefix = $"NovelAI";
     List<(string Name, byte[] Data)> images = new();
-    foreach (var entry in zipArchive.Entries)
+    byte[] zipBytes;
         {
-        using var entryStream = entry.Open();
-            byte[] bytes;
-            using (var ms = new MemoryStream())
-    {
-                entryStream.CopyTo(ms);
-                bytes = ms.ToArray();
+        using (MemoryStream zipMemoryStream = new MemoryStream())
+        {
+            using (FileResponse generationResp = await novelAI.AiGenerateImageAsync(imageRequest))
+            {
+                await generationResp.Stream.CopyToAsync(zipMemoryStream);
             }
 
-            images.Add((entry.Name, bytes));
+            using (ZipArchive zipArchive = new ZipArchive(zipMemoryStream, ZipArchiveMode.Update))
+            {
+                int count = 0;
+
+                foreach (var entry in zipArchive.Entries.ToArray())
+                {
+                    using (Stream entryStream = entry.Open())
+                    {
+                        string entryName = $"{filePrefix}_{++count}.png";
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            await entryStream.CopyToAsync(ms);
+                            images.Add((entryName, ms.ToArray()));
+                        }
+
+                        entryStream.Position = 0;
+                        using (Stream newEntryStream = zipArchive.CreateEntry(entryName, CompressionLevel.NoCompression).Open())
+    {
+                            await entryStream.CopyToAsync(newEntryStream);
+                        }
+                    }
+                    entry.Delete();
+                }
+            }
+            zipBytes = zipMemoryStream.ToArray();
         }
-    imageResp.Dispose();
+            }
+
+    stopwatch.Stop();
+    Console.WriteLine($"Finished Request in {stopwatch.Elapsed.TotalSeconds} seconds");
+    stopwatch.Restart();
+
+    Console.WriteLine("Saving");
+
+    if (File.Exists($"{filePrefix}.zip"))
+    {
+        File.Delete($"{filePrefix}.zip");
+        }
+    File.WriteAllBytes($"{filePrefix}.zip", zipBytes);
 
     foreach (var image in images)
     {
-        Console.WriteLine("Saving " + image.Name);
+        if (File.Exists(image.Name))
+        {
+            File.Delete(image.Name);
+        }
         File.WriteAllBytes(image.Name, image.Data);
     }
         
-    Console.WriteLine($"Got Image Resp in {stopwatch.Elapsed.TotalSeconds} seconds");
+    stopwatch.Stop();
+    Console.WriteLine($"Saved in {stopwatch.Elapsed.TotalSeconds} seconds");
+
+    Console.ReadLine();
 }
