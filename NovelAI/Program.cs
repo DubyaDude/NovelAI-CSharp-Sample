@@ -21,8 +21,8 @@ Console.WriteLine("Got Account Tier: " + userResp.Tier);
 var imageParameters = new AiGenerateImageParameters()
 {
     // Put parameters here (width, heignt, etc)
-    Width = AiGenerateImageDimension._640,
-    Height = AiGenerateImageDimension._640,
+    Width = AiGenerateImageDimension._1024,
+    Height = AiGenerateImageDimension._1024,
 };
 var userInput = "masterpiece, best quality, fox girl, red, galaxy, space, planets";
 var model = AiGenerateImageModals.NaiDiffusion;

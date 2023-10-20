@@ -3503,6 +3503,13 @@
       "AiGenerateRequest": {
         "type": "object",
         "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "generate"
+            ],
+            "default": "generate"
+          },
           "input": {
             "type": "string",
             "minLength": 1,
@@ -3582,18 +3589,25 @@
       "AiGenerateImageParameters": {
         "type": "object",
         "properties": {
-          "width": {
-            "$ref": "#/components/schemas/AiGenerateImageDimension"
+          "dynamic_thresholding": {
+            "type": "boolean",
+            "default": false
           },
           "height": {
             "$ref": "#/components/schemas/AiGenerateImageDimension"
           },
-          "scale": {
-            "type": "number",
-            "format": "float",
-            "minimum": 1.1,
-            "maximum": 100,
-            "default": 11
+          "n_samples": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 4,
+            "default": 1
+          },
+          "negative_prompt": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 14000,
+            "default": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry"
           },
           "qualityToggle": {
             "type": "boolean",
@@ -3615,6 +3629,19 @@
             ],
             "default": "k_euler_ancestral"
           },
+          "scale": {
+            "type": "number",
+            "format": "float",
+            "minimum": 1.1,
+            "maximum": 100,
+            "default": 11
+          },
+          "seed": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "maximum": 4294967295
+          },
           "sm": {
             "type": "boolean",
             "default": false
@@ -3630,33 +3657,6 @@
             "maximum": 50,
             "default": 28
           },
-          "seed": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 0,
-            "maximum": 4294967295
-          },
-          "n_samples": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 4,
-            "default": 1
-          },
-          "strength": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 0.9999999999999999,
-            "default": 0.7
-          },
-          "noise": {
-            "type": "number",
-            "format": "float",
-            "minimum": 0,
-            "maximum": 1,
-            "default": 0.2
-          },
           "ucPreset": {
             "type": "integer",
             "format": "int32",
@@ -3667,11 +3667,15 @@
             ],
             "default": 0
           },
-          "negative_prompt": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 14000,
-            "default": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry"
+          "uncond_scale": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1.5,
+            "default": 1
+          },
+          "width": {
+            "$ref": "#/components/schemas/AiGenerateImageDimension"
           }
         }
       },
@@ -3682,6 +3686,7 @@
           "enum": [
             "safe-diffusion",
             "nai-diffusion",
+            "nai-diffusion-2",
             "nai-diffusion-furry"
           ]
       },
