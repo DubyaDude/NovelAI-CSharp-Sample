@@ -5979,6 +5979,10 @@ namespace NovelAI.OpenApi
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class AiGenerateImageParameters
     {
+        [Newtonsoft.Json.JsonProperty("cfg_rescale", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [System.ComponentModel.DataAnnotations.Range(0D, 1D)]
+        public float Cfg_rescale { get; set; } = 0F;
+
         [Newtonsoft.Json.JsonProperty("dynamic_thresholding", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool Dynamic_thresholding { get; set; } = false;
 
@@ -5992,6 +5996,10 @@ namespace NovelAI.OpenApi
         [Newtonsoft.Json.JsonProperty("negative_prompt", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.StringLength(14000, MinimumLength = 1)]
         public string Negative_prompt { get; set; } = "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry";
+
+        [Newtonsoft.Json.JsonProperty("noise_schedule", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public AiGenerateImageParametersNoise_schedule Noise_schedule { get; set; } = NovelAI.OpenApi.AiGenerateImageParametersNoise_schedule.Native;
 
         [Newtonsoft.Json.JsonProperty("qualityToggle", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool QualityToggle { get; set; } = true;
@@ -6055,8 +6063,11 @@ namespace NovelAI.OpenApi
         [System.Runtime.Serialization.EnumMember(Value = @"nai-diffusion-2")]
         NaiDiffusion2 = 2,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"nai-diffusion-3")]
+        NaiDiffusion3 = 3,
+
         [System.Runtime.Serialization.EnumMember(Value = @"nai-diffusion-furry")]
-        NaiDiffusionFurry = 3,
+        NaiDiffusionFurry = 4,
 
     }
 
@@ -6510,6 +6521,24 @@ namespace NovelAI.OpenApi
 
         [System.Runtime.Serialization.EnumMember(Value = @"infillmodel")]
         Infillmodel = 8,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum AiGenerateImageParametersNoise_schedule
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"native")]
+        Native = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"karras")]
+        Karras = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"exponential")]
+        Exponential = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"polyexponential")]
+        Polyexponential = 3,
 
     }
 

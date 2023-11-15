@@ -3589,6 +3589,13 @@
       "AiGenerateImageParameters": {
         "type": "object",
         "properties": {
+          "cfg_rescale": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 1,
+            "default": 0
+          },
           "dynamic_thresholding": {
             "type": "boolean",
             "default": false
@@ -3608,6 +3615,16 @@
             "minLength": 1,
             "maxLength": 14000,
             "default": "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry"
+          },
+          "noise_schedule": {
+            "type": "string",
+            "enum": [
+              "native",
+              "karras",
+              "exponential",
+              "polyexponential",
+            ],
+            "default": "native"
           },
           "qualityToggle": {
             "type": "boolean",
@@ -3687,6 +3704,7 @@
             "safe-diffusion",
             "nai-diffusion",
             "nai-diffusion-2",
+            "nai-diffusion-3",
             "nai-diffusion-furry"
           ]
       },
